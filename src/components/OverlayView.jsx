@@ -82,14 +82,12 @@ export class OverlayView extends React.PureComponent {
     this.state = {
       [OVERLAY_VIEW]: overlayView,
     }
-  }
 
-  onAdd() {
     this.containerElement = document.createElement(`div`)
     this.containerElement.style.position = `absolute`
   }
 
-  draw() {
+  onAdd() {
     const { mapPaneName } = this.props
     invariant(
       !!mapPaneName,
@@ -98,17 +96,12 @@ export class OverlayView extends React.PureComponent {
     )
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
     const mapPanes = this.state[OVERLAY_VIEW].getPanes()
-    mapPanes[mapPaneName].appendChild(this.containerElement)
-
-    ReactDOM.unstable_renderSubtreeIntoContainer(
-      this,
-      React.Children.only(this.props.children),
-      this.containerElement,
-      this.onPositionElement
-    )
+    if (mapPanes && this.containerElement) {
+      mapPanes[mapPaneName].appendChild(this.containerElement)
+    }
   }
 
-  onPositionElement() {
+  draw() {
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapCanvasProjection
     const mapCanvasProjection = this.state[OVERLAY_VIEW].getProjection()
 
@@ -159,7 +152,12 @@ export class OverlayView extends React.PureComponent {
   }
 
   render() {
-    return false
+    return ReactDOM.unstable_renderSubtreeIntoContainer(
+      this,
+      React.Children.only(this.props.children),
+      this.containerElement,
+      this.onPositionElement
+    )
   }
 
   /**
