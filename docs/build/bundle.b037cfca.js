@@ -46225,6 +46225,7 @@
               i.a.assign(this.containerElement.style, n)
             },
           },
+          { key: "onPositionElement", value: function onPositionElement() {} },
           {
             key: "onRemove",
             value: function onRemove() {
