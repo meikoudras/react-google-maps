@@ -46191,6 +46191,8 @@
           (n.onPositionElement = i.a.bind(n.onPositionElement, n)),
           r.setMap(n.context[g.l]),
           (n.state = _defineProperty({}, g.p, r)),
+          (n.containerElement = document.createElement("div")),
+          (n.containerElement.style.position = "absolute"),
           n
         )
       }
@@ -46199,31 +46201,21 @@
           {
             key: "onAdd",
             value: function onAdd() {
-              ;(this.containerElement = document.createElement("div")),
-                (this.containerElement.style.position = "absolute")
-            },
-          },
-          {
-            key: "draw",
-            value: function draw() {
               var e = this.props.mapPaneName
               a()(
                 !!e,
                 "OverlayView requires either props.mapPaneName or props.defaultMapPaneName but got %s",
                 e
               )
-              this.state[g.p].getPanes()[e].appendChild(this.containerElement),
-                d.a.unstable_renderSubtreeIntoContainer(
-                  this,
-                  u.a.Children.only(this.props.children),
-                  this.containerElement,
-                  this.onPositionElement
-                )
+              var t = this.state[g.p].getPanes()
+              t &&
+                this.containerElement &&
+                t[e].appendChild(this.containerElement)
             },
           },
           {
-            key: "onPositionElement",
-            value: function onPositionElement() {
+            key: "draw",
+            value: function draw() {
               var e = this.state[g.p].getProjection(),
                 t = Object.assign(
                   { x: 0, y: 0 },
@@ -46271,7 +46263,12 @@
           {
             key: "render",
             value: function render() {
-              return !1
+              return d.a.unstable_renderSubtreeIntoContainer(
+                this,
+                u.a.Children.only(this.props.children),
+                this.containerElement,
+                this.onPositionElement
+              )
             },
           },
           {
