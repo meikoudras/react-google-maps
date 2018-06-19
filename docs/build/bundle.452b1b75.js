@@ -46213,7 +46213,7 @@
                   "OverlayView requires either props.mapPaneName or props.defaultMapPaneName but got %s",
                   e
                 ),
-                this.state[g.p])
+                this.state && this.state[g.p])
               ) {
                 var t = this.state[g.p].getPanes()
                 t &&
