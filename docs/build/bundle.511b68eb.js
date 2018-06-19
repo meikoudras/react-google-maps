@@ -46207,18 +46207,25 @@
             key: "draw",
             value: function draw() {
               var e = this.props.mapPaneName
-              a()(
-                !!e,
-                "OverlayView requires either props.mapPaneName or props.defaultMapPaneName but got %s",
-                e
-              )
-              this.state[g.p].getPanes()[e].appendChild(this.containerElement),
-                d.a.unstable_renderSubtreeIntoContainer(
-                  this,
-                  u.a.Children.only(this.props.children),
-                  this.containerElement,
-                  this.onPositionElement
-                )
+              if (
+                (a()(
+                  !!e,
+                  "OverlayView requires either props.mapPaneName or props.defaultMapPaneName but got %s",
+                  e
+                ),
+                this.state[g.p])
+              ) {
+                var t = this.state[g.p].getPanes()
+                t &&
+                  this.containerElement &&
+                  (t[e].appendChild(this.containerElement),
+                  d.a.unstable_renderSubtreeIntoContainer(
+                    this,
+                    u.a.Children.only(this.props.children),
+                    this.containerElement,
+                    this.onPositionElement
+                  ))
+              }
             },
           },
           {
@@ -46236,11 +46243,12 @@
           {
             key: "onRemove",
             value: function onRemove() {
-              this.containerElement.parentNode.removeChild(
-                this.containerElement
-              ),
+              this.containerElement &&
+                (this.containerElement.parentNode.removeChild(
+                  this.containerElement
+                ),
                 d.a.unmountComponentAtNode(this.containerElement),
-                (this.containerElement = null)
+                (this.containerElement = null))
             },
           },
           {
