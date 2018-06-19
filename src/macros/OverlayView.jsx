@@ -94,7 +94,7 @@ export class OverlayView extends React.PureComponent {
       mapPaneName
     )
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
-    if (this.state[OVERLAY_VIEW]) {
+    if (this.state && this.state[OVERLAY_VIEW]) {
       const mapPanes = this.state[OVERLAY_VIEW].getPanes()
       if (mapPanes && this.containerElement) {
         mapPanes[mapPaneName].appendChild(this.containerElement)
