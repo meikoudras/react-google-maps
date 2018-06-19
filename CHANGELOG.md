@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="9.4.7"></a>
+## [9.4.7](https://github.com/tomchentw/react-google-maps/compare/v9.4.5...v9.4.7) (2018-06-19)
+
+
+
 <a name="9.4.6"></a>
 ## [9.4.6](https://github.com/tomchentw/react-google-maps/compare/v9.4.5...v9.4.6) (2018-06-19)
 
