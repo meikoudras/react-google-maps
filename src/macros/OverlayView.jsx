@@ -72,7 +72,6 @@ export class OverlayView extends React.PureComponent {
     overlayView.onAdd = _.bind(this.onAdd, this)
     overlayView.draw = _.bind(this.draw, this)
     overlayView.onRemove = _.bind(this.onRemove, this)
-    this.onPositionElement = _.bind(this.onPositionElement, this)
     // You must call setMap() with a valid Map object to trigger the call to
     // the onAdd() method and setMap(null) in order to trigger the onRemove() method.
     overlayView.setMap(this.context[MAP])
@@ -84,9 +83,7 @@ export class OverlayView extends React.PureComponent {
   onAdd() {
     this.containerElement = document.createElement(`div`)
     this.containerElement.style.position = `absolute`
-  }
 
-  draw() {
     const { mapPaneName } = this.props
     invariant(
       !!mapPaneName,
@@ -98,18 +95,11 @@ export class OverlayView extends React.PureComponent {
       const mapPanes = this.state[OVERLAY_VIEW].getPanes()
       if (mapPanes && this.containerElement) {
         mapPanes[mapPaneName].appendChild(this.containerElement)
-
-        ReactDOM.unstable_renderSubtreeIntoContainer(
-          this,
-          React.Children.only(this.props.children),
-          this.containerElement,
-          this.onPositionElement
-        )
       }
     }
   }
 
-  onPositionElement() {
+  draw() {
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapCanvasProjection
     const mapCanvasProjection = this.state[OVERLAY_VIEW].getProjection()
 
@@ -162,7 +152,14 @@ export class OverlayView extends React.PureComponent {
   }
 
   render() {
-    return false
+    if (this.containerElement) {
+      return ReactDOM.createPortal(
+        React.Children.only(this.props.children),
+        this.containerElement
+      )
+    }
+
+    return null
   }
 }
 
