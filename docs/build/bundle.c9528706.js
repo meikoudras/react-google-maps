@@ -46212,7 +46212,8 @@
                 var t = this.state[g.p].getPanes()
                 t &&
                   this.containerElement &&
-                  (t[e].appendChild(this.containerElement), this.draw())
+                  (t[e].appendChild(this.containerElement),
+                  this.state[g.p].draw())
               }
             },
           },
@@ -46241,7 +46242,7 @@
             key: "componentDidUpdate",
             value: function componentDidUpdate(e) {
               Object(f.b)(this, this.state[g.p], v, _, e),
-                i.a.delay(this.state[g.p].draw)
+                this.state[g.p].draw()
             },
           },
           {
