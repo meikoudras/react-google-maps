@@ -98,34 +98,31 @@ export class OverlayView extends React.PureComponent {
       const mapPanes = this.state[OVERLAY_VIEW].getPanes()
       if (mapPanes && this.containerElement) {
         mapPanes[mapPaneName].appendChild(this.containerElement)
+        this.draw()
       }
     }
   }
 
   draw() {
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapCanvasProjection
-    const mapCanvasProjection = this.state[OVERLAY_VIEW].getProjection()
-
-    const offset = {
-      x: 0,
-      y: 0,
-      ...getOffsetOverride(this.containerElement, this.props),
-    }
-    const layoutStyles = getLayoutStyles(
-      mapCanvasProjection,
-      offset,
-      this.props
-    )
-    _.assign(this.containerElement.style, layoutStyles)
-  }
-
-  onRemove() {
     if (this.containerElement) {
-      this.containerElement.parentNode.removeChild(this.containerElement)
-      ReactDOM.unmountComponentAtNode(this.containerElement)
-      this.containerElement = null
+      const mapCanvasProjection = this.state[OVERLAY_VIEW].getProjection()
+
+      const offset = {
+        x: 0,
+        y: 0,
+        ...getOffsetOverride(this.containerElement, this.props),
+      }
+      const layoutStyles = getLayoutStyles(
+        mapCanvasProjection,
+        offset,
+        this.props
+      )
+      _.assign(this.containerElement.style, layoutStyles)
     }
   }
+
+  onRemove() {}
 
   componentDidMount() {
     componentDidMount(this, this.state[OVERLAY_VIEW], eventMap)
