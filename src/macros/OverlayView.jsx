@@ -95,7 +95,7 @@ export class OverlayView extends React.PureComponent {
       const mapPanes = this.state[OVERLAY_VIEW].getPanes()
       if (mapPanes && this.containerElement) {
         mapPanes[mapPaneName].appendChild(this.containerElement)
-        this.draw()
+        this.state[OVERLAY_VIEW].draw()
       }
     }
   }
@@ -133,7 +133,7 @@ export class OverlayView extends React.PureComponent {
       updaterMap,
       prevProps
     )
-    _.delay(this.state[OVERLAY_VIEW].draw)
+    this.state[OVERLAY_VIEW].draw()
   }
 
   componentWillUnmount() {
