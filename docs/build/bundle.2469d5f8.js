@@ -46212,33 +46212,25 @@
                 var t = this.state[g.p].getPanes()
                 t &&
                   this.containerElement &&
-                  t[e].appendChild(this.containerElement)
+                  (t[e].appendChild(this.containerElement), this.draw())
               }
             },
           },
           {
             key: "draw",
             value: function draw() {
-              var e = this.state[g.p].getProjection(),
-                t = Object.assign(
-                  { x: 0, y: 0 },
-                  Object(m.b)(this.containerElement, this.props)
-                ),
-                n = Object(m.a)(e, t, this.props)
-              i.a.assign(this.containerElement.style, n)
+              if (this.containerElement) {
+                var e = this.state[g.p].getProjection(),
+                  t = Object.assign(
+                    { x: 0, y: 0 },
+                    Object(m.b)(this.containerElement, this.props)
+                  ),
+                  n = Object(m.a)(e, t, this.props)
+                i.a.assign(this.containerElement.style, n)
+              }
             },
           },
-          {
-            key: "onRemove",
-            value: function onRemove() {
-              this.containerElement &&
-                (this.containerElement.parentNode.removeChild(
-                  this.containerElement
-                ),
-                d.a.unmountComponentAtNode(this.containerElement),
-                (this.containerElement = null))
-            },
-          },
+          { key: "onRemove", value: function onRemove() {} },
           {
             key: "componentDidMount",
             value: function componentDidMount() {
