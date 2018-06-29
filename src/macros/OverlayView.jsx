@@ -75,15 +75,16 @@ export class OverlayView extends React.PureComponent {
     // You must call setMap() with a valid Map object to trigger the call to
     // the onAdd() method and setMap(null) in order to trigger the onRemove() method.
     overlayView.setMap(this.context[MAP])
+
+    this.containerElement = document.createElement(`div`)
+    this.containerElement.style.position = `absolute`
+
     this.state = {
       [OVERLAY_VIEW]: overlayView,
     }
   }
 
   onAdd() {
-    this.containerElement = document.createElement(`div`)
-    this.containerElement.style.position = `absolute`
-
     const { mapPaneName } = this.props
     invariant(
       !!mapPaneName,
