@@ -46189,6 +46189,8 @@
           (r.draw = i.a.bind(n.draw, n)),
           (r.onRemove = i.a.bind(n.onRemove, n)),
           r.setMap(n.context[g.l]),
+          (n.containerElement = document.createElement("div")),
+          (n.containerElement.style.position = "absolute"),
           (n.state = _defineProperty({}, g.p, r)),
           n
         )
@@ -46198,8 +46200,6 @@
           {
             key: "onAdd",
             value: function onAdd() {
-              ;(this.containerElement = document.createElement("div")),
-                (this.containerElement.style.position = "absolute")
               var e = this.props.mapPaneName
               if (
                 (a()(
